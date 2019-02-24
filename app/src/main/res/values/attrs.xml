@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ProgressButton">
+        <attr name="android:text" format="string"/>
+        <attr name="android:textColor" format="color"/>
+        <attr name="android:textSize" format="dimension"/>
+        <attr name="android:textAllCaps" format="boolean"/>
+        <attr name="android:textStyle">
+            <flag name="normal" value="0" />
+            <flag name="bold" value="1" />
+            <flag name="italic" value="2" />
+        </attr>
+        <attr name="cornerRadius" format="dimension"/>
+        <attr name="pressColor" format="color"/>
+        <attr name="pressText" format="string"/>
+        <attr name="progressBarVisibility" format="boolean"/>
+    </declare-styleable>
+</resources>
