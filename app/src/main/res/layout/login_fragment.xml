@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
     <data>
         <variable name="viewmodel" type="com.example.snapphoto.ui.start.login.LoginViewModel"/>
     </data>
@@ -8,16 +9,70 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.start.login.LoginFragment">
-        <com.example.snapphoto.ui.view.ProgressButton
-                android:id="@+id/logInButton"
+
+        <TextView
+                android:text="@string/log_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/emailTextInput"
+                app:layout_constraintVertical_chainStyle="packed" android:layout_marginBottom="32dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoTextInputLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintBottom_toTopOf="@+id/usernameTextInput" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="60dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="60dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/email"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoTextInputLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/emailTextInput"
+                app:layout_constraintBottom_toTopOf="@+id/logInButton"
+                app:layout_constraintEnd_toEndOf="@+id/emailTextInput"
+                app:layout_constraintStart_toStartOf="@+id/emailTextInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.example.snapphoto.ui.view.ProgressButton
+                android:id="@+id/logInButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 style="@style/SnapPhotoButtonTheme"
+                android:text="@string/log_in"
+                android:textColor="@android:color/white"
+                app:onLoadingText="@string/logging_in"
+                app:backgroundColor="@color/colorBlue"
+                app:onPressBackgroundColor="@color/colorBlueDark"
+                app:onLoadingBackgroundColor="@color/colorYellow"
                 android:onClick="@{() -> viewmodel.logInButtonClicked()}"
-                app:progressBarVisibility="@{safeUnbox(viewmodel.dataChecking)}"
-                app:layout_constraintTop_toTopOf="parent"
+                app:startLoading="@{safeUnbox(viewmodel.loading)}"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

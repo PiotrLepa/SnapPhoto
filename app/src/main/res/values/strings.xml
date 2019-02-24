@@ -3,4 +3,10 @@
     <string name="sign_up">Sign Up</string>
     <string name="log_in">Log In</string>
     <string name="logo">logo</string>
+    <string name="logging_in">Logging In</string>
+    <string name="signing_up">Signing Up</string>
+    <string name="email">e-mail</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="username">username</string>
 </resources>

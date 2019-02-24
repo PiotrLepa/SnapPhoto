@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
             android:text="labelText"
@@ -18,8 +18,4 @@
             app:layout_constraintEnd_toStartOf="@+id/labelText"
             app:layout_constraintTop_toTopOf="@+id/labelText" app:layout_constraintBottom_toBottomOf="@+id/labelText"
             android:layout_width="wrap_content" android:layout_height="0dp"/>
-    <androidx.constraintlayout.widget.Barrier android:layout_width="wrap_content" android:layout_height="wrap_content"
-                                              android:id="@+id/barrier2" app:barrierDirection="top"
-                                              app:constraint_referenced_ids="labelText,progressBar"
-                                              tools:layout_editor_absoluteY="731dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

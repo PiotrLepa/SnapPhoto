@@ -25,4 +25,15 @@
         <item name="cornerRadius">30dp</item>
     </style>
 
+    <!-- TextInputLayt Floating Label Color -->
+    <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
+    <style name="SnapPhotoTextInputLayoutStyle" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/colorBlue</item>
+        <item name="hintTextAppearance">@style/TextAppearance.App.TextInputLayout</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
 </resources>

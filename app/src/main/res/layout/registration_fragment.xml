@@ -1,14 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.start.registration.RegistrationFragment">
-
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="viewmodel" type="com.example.snapphoto.ui.start.registration.RegistrationViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello"/>
+            tools:context=".ui.start.registration.RegistrationFragment">
 
-</FrameLayout>
+        <TextView
+                android:text="@string/sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.5" app:layout_constraintBottom_toTopOf="@+id/emailTextInput"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoTextInputLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintBottom_toTopOf="@+id/usernameTextInput" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginEnd="60dp" android:layout_marginStart="60dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="@string/email"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/usernameTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoTextInputLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/emailTextInput"
+                app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/emailTextInput"
+                app:layout_constraintStart_toStartOf="@+id/emailTextInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoTextInputLayoutStyle"
+                app:layout_constraintTop_toBottomOf="@+id/usernameTextInput"
+                app:layout_constraintBottom_toTopOf="@+id/confirmPasswordTextInput"
+                app:layout_constraintEnd_toEndOf="@+id/usernameTextInput"
+                app:layout_constraintStart_toStartOf="@+id/usernameTextInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmPasswordTextInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoTextInputLayoutStyle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordInputLayout"
+                app:layout_constraintEnd_toEndOf="@+id/passwordInputLayout"
+                app:layout_constraintStart_toStartOf="@+id/passwordInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.example.snapphoto.ui.view.ProgressButton
+                android:id="@+id/signUpButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                style="@style/SnapPhotoButtonTheme"
+                android:text="@string/sign_up"
+                android:textColor="@android:color/white"
+                app:onLoadingText="@string/signing_up"
+                app:backgroundColor="@color/colorBlue"
+                app:onPressBackgroundColor="@color/colorBlueDark"
+                app:onLoadingBackgroundColor="@color/colorYellow"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

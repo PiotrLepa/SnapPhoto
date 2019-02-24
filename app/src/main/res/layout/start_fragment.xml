@@ -40,7 +40,7 @@
                 android:onClick="@{() -> viewmodel.signUpButtonClicked()}"
                 android:backgroundTint="@color/colorBlue"
                 android:textColor="@android:color/white"
-                app:rippleColor="@color/colorLightGray"
+                app:rippleColor="@color/colorBlueDark"
                 style="@style/SnapPhotoButtonTheme"
                 app:layout_constraintStart_toEndOf="@+id/logInButton" app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"

@@ -6,12 +6,16 @@ import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.snapphoto.R
 import kotlinx.android.synthetic.main.progress_button.view.*
-import timber.log.Timber
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
-import android.view.ViewOutlineProvider
+import androidx.core.content.ContextCompat
+import com.example.snapphoto.R
+import timber.log.Timber
+import android.graphics.drawable.RotateDrawable
+import android.graphics.drawable.LayerDrawable
+
+
 
 
 class ProgressButton @JvmOverloads constructor(
@@ -20,48 +24,71 @@ class ProgressButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    var text = "Default"
+    private var text = ""
         set(value) {
             field = value
             labelText.text = value}
-    var textColor = Color.GRAY
+
+    private var textColor = Color.GRAY
         set(value) {
             field = value
             labelText.setTextColor(textColor)
         }
-    var textSize = 15f
+
+    private var textSize = 15f
         set(value) {
             field = value
             labelText.textSize = textSize
         }
-    var textAllCaps = false
+
+    private var textAllCaps = false
         set(value) {
             field = value
-            if (textAllCaps) text = text.toUpperCase() }
-    var textStyle = Typeface.NORMAL
+            labelText.isAllCaps = value
+            }
+
+    private var textStyle = Typeface.NORMAL
         set(value) {
             field = value
             labelText.typeface = Typeface.create(Typeface.DEFAULT, value)
         }
-    var cornerRadius = 0f
+
+    var startLoading = false
         set(value) {
             field = value
-//            clipToOutline = true
-//            outlineProvider = RoundedOutlineProvider(120f)
-            roundCorners()
+            if (value) {
+                progressBarVisibility = true
+                labelText.text = onLoadingText
+                setBackgroundGradientDrawable()
+            } else {
+                progressBarVisibility = false
+                labelText.text = text
+                setBackgroundGradientDrawable()
+            }
         }
-    var pressedColor = Color.BLACK
-    var pressedText = "Pressed"
-    var progressBarVisibility = false
+
+    private var progressBarVisibility = false
         set(visibility) {
-            Timber.d("setter started")
             field = visibility
             if (visibility) progressBar.visibility = View.VISIBLE
             else progressBar.visibility = View.GONE
         }
-        get() = true
+
+    private var cornerRadius = 0f
+    private var defaultBackgroundColor = Color.LTGRAY
+    private var onPressBackgroundColor = Color.LTGRAY
+    private var onLoadingBackgroundColor = Color.LTGRAY
+    private var onLoadingText = ""
+
+    companion object {
+        private val states = arrayOf(
+            intArrayOf(android.R.attr.state_pressed),
+            intArrayOf(android.R.attr.state_enabled)
+        )
+    }
 
     init {
+        Timber.d("init: started")
         View.inflate(context, R.layout.progress_button, this)
         context.theme.obtainStyledAttributes(
             attrs,
@@ -73,36 +100,34 @@ class ProgressButton @JvmOverloads constructor(
                 recycle()
             }
         }
-        roundCorners()
+        setBackgroundGradientDrawable()
     }
 
     private fun initAttrs(typedArray: TypedArray) {
         typedArray.apply {
-            text = getString(R.styleable.ProgressButton_android_text) ?: "Default"
-            textColor = getColor(R.styleable.ProgressButton_android_textColor, Color.GRAY)
+            Timber.d("initAttrs: started")
+            text = getString(R.styleable.ProgressButton_android_text) ?: ""
+            textColor = getColor(R.styleable.ProgressButton_android_textColor, Color.LTGRAY)
             textSize = getDimension(R.styleable.ProgressButton_android_textSize, 15f)
             textAllCaps = getBoolean(R.styleable.ProgressButton_android_textAllCaps, false)
             textStyle = getInt(R.styleable.ProgressButton_android_textStyle, Typeface.NORMAL)
             cornerRadius = getDimension(R.styleable.ProgressButton_cornerRadius, 0f)
-            pressedColor = getColor(R.styleable.ProgressButton_pressColor, Color.BLACK)
-            pressedText = getString(R.styleable.ProgressButton_pressText) ?: "Pressed"
-            progressBarVisibility = getBoolean(R.styleable.ProgressButton_progressBarVisibility, false)
+            defaultBackgroundColor = getColor(R.styleable.ProgressButton_backgroundColor, Color.LTGRAY)
+            onPressBackgroundColor = getColor(R.styleable.ProgressButton_onPressBackgroundColor, Color.LTGRAY)
+            onLoadingBackgroundColor = getColor(R.styleable.ProgressButton_onLoadingBackgroundColor, Color.LTGRAY)
+            onLoadingText = getString(R.styleable.ProgressButton_onLoadingText) ?: ""
+            startLoading = getBoolean(R.styleable.ProgressButton_startLoading, false)
         }
     }
-
-    private fun roundCorners() {
+    private fun setBackgroundGradientDrawable() {
+        Timber.d("setBackgroundGradientDrawable: started")
         val shape = GradientDrawable()
         shape.shape = GradientDrawable.RECTANGLE
         shape.cornerRadius = cornerRadius
-        shape.color = ColorStateList.valueOf(Color.BLUE)
-        this.background = shape
-    }
 
-    class RoundedOutlineProvider(private val radius: Float) : ViewOutlineProvider() {
-        override fun getOutline(view: View?, outline: Outline?) {
-            if (view != null && outline != null) {
-                outline.setRoundRect(0, 0, view.width, view.height, radius)
-            }
-        }
+        val colors = intArrayOf(onPressBackgroundColor, defaultBackgroundColor)
+        shape.color = ColorStateList(states, colors)
+
+        this.background = shape
     }
 }

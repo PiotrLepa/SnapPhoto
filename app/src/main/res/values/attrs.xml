@@ -11,8 +11,10 @@
             <flag name="italic" value="2" />
         </attr>
         <attr name="cornerRadius" format="dimension"/>
-        <attr name="pressColor" format="color"/>
-        <attr name="pressText" format="string"/>
-        <attr name="progressBarVisibility" format="boolean"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="onPressBackgroundColor" format="color"/>
+        <attr name="onLoadingBackgroundColor" format="color"/>
+        <attr name="onLoadingText" format="string"/>
+        <attr name="startLoading" format="boolean"/>
     </declare-styleable>
 </resources>
