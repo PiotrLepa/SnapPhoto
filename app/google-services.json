@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "78914266775",
+    "firebase_url": "https://snapphoto-86911.firebaseio.com",
+    "project_id": "snapphoto-86911",
+    "storage_bucket": "snapphoto-86911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:78914266775:android:f26228c0409fcdfd",
+        "android_client_info": {
+          "package_name": "com.example.snapphoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "78914266775-tk8bf978qnii2dg89thq582e97q2lkj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.snapphoto",
+            "certificate_hash": "a6301b53e22d674691f7781631ba34d531ad9d99"
+          }
+        },
+        {
+          "client_id": "78914266775-gc02mhq4jap55g9j594ild8mb024idog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUN5UaTLTyJliZ43mbTQCvdGb9dxHExz0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "78914266775-gc02mhq4jap55g9j594ild8mb024idog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
