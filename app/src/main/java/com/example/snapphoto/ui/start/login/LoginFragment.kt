@@ -1,6 +1,5 @@
 package com.example.snapphoto.ui.start.login
 
-import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +10,6 @@ import androidx.databinding.DataBindingUtil
 
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.LoginFragmentBinding
-import kotlinx.android.synthetic.main.login_fragment.*
-import java.util.*
-import kotlin.concurrent.schedule
 
 class LoginFragment : Fragment() {
 
@@ -34,5 +30,4 @@ class LoginFragment : Fragment() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
     }
-
 }

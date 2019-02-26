@@ -3,6 +3,7 @@
         xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable name="viewmodel" type="com.example.snapphoto.ui.start.login.LoginViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +38,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/email"/>
+                    android:hint="@string/email"
+                    android:text="@={viewmodel.emailTextInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,9 +55,22 @@
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:hint="@string/password"
-                    android:inputType="textPassword"/>
+                    android:text="@={viewmodel.passwordTextInput}"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+                android:id="@+id/errorTextView"
+                android:text="@string/email_or_password_are_incorrect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="@{viewmodel.isLoginFailed ? View.VISIBLE : View.INVISIBLE}"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintTop_toBottomOf="@+id/usernameTextInput" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"/>
 
         <com.example.snapphoto.ui.view.ProgressButton
                 android:id="@+id/logInButton"
@@ -69,7 +84,7 @@
                 app:onPressBackgroundColor="@color/colorBlueDark"
                 app:onLoadingBackgroundColor="@color/colorYellow"
                 android:onClick="@{() -> viewmodel.logInButtonClicked()}"
-                app:startLoading="@{safeUnbox(viewmodel.loading)}"
+                app:startLoading="@{viewmodel.loading}"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
                 app:layout_constraintStart_toStartOf="parent"

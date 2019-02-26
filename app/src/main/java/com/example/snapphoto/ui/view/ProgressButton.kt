@@ -24,6 +24,20 @@ class ProgressButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
+    var startLoading = false
+        set(value) {
+            field = value
+            if (value) {
+                progressBarVisibility = true
+                labelText.text = onLoadingText
+                setBackgroundGradientDrawable()
+            } else {
+                progressBarVisibility = false
+                labelText.text = text
+                setBackgroundGradientDrawable()
+            }
+        }
+
     private var text = ""
         set(value) {
             field = value
@@ -32,7 +46,8 @@ class ProgressButton @JvmOverloads constructor(
     private var textColor = Color.GRAY
         set(value) {
             field = value
-            labelText.setTextColor(textColor)
+            labelText.setTextColor(value)
+            progressBar.indeterminateTintList = ColorStateList.valueOf(value)
         }
 
     private var textSize = 15f
@@ -51,20 +66,6 @@ class ProgressButton @JvmOverloads constructor(
         set(value) {
             field = value
             labelText.typeface = Typeface.create(Typeface.DEFAULT, value)
-        }
-
-    var startLoading = false
-        set(value) {
-            field = value
-            if (value) {
-                progressBarVisibility = true
-                labelText.text = onLoadingText
-                setBackgroundGradientDrawable()
-            } else {
-                progressBarVisibility = false
-                labelText.text = text
-                setBackgroundGradientDrawable()
-            }
         }
 
     private var progressBarVisibility = false
