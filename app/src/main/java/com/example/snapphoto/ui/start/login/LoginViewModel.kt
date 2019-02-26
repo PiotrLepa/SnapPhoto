@@ -9,7 +9,9 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class LoginViewModel : ViewModel(){
+class LoginViewModel(
+    private val loginFragmentNavigator: LoginFragmentNavigator
+) : ViewModel() {
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -28,16 +30,12 @@ class LoginViewModel : ViewModel(){
         Timber.d("logInButtonClicked: started")
         _isLoginFailed.value = false
         if (!areFieldsEmpty()) {
-            _isLoading.value = true
-            viewModelScope.launch {
-                try {
-                    val job = mAuth.signInWithEmailAndPassword(emailTextInput.value.toString(), passwordTextInput.value.toString()).await()
-                    Timber.d("logInButtonClicked: job: $job")
-                } catch (e: Exception) {
-                    Timber.e("logInButtonClicked: Login Failed: Exception: ${e.message}")
-                    _isLoginFailed.postValue(true)
-                }
-                _isLoading.postValue(false)
+            launchSignInUser {
+                mAuth.signInWithEmailAndPassword(
+                    emailTextInput.value.toString(),
+                    passwordTextInput.value.toString())
+                    .await()
+                navigateToMainScreen()
             }
         } else {
             _isLoginFailed.value = true
@@ -47,4 +45,21 @@ class LoginViewModel : ViewModel(){
     private fun areFieldsEmpty() =
         emailTextInput.value.isNullOrEmpty() || passwordTextInput.value.isNullOrEmpty()
 
+    private fun launchSignInUser(block: suspend () -> Unit) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                block()
+            } catch (e: Exception) {
+                Timber.e("logInButtonClicked: Login Failed: Exception: ${e.message}")
+                _isLoginFailed.value = true
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    private fun navigateToMainScreen() {
+        loginFragmentNavigator.startMainActivity()
+    }
 }

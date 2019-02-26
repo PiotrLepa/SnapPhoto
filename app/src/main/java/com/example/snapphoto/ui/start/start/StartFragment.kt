@@ -7,17 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.StartFragmentBinding
-import com.example.snapphoto.ui.start.FragmentNavigator
 
-class StartFragment : Fragment(), FragmentNavigator {
+class StartFragment : Fragment(), StartFragmentNavigator {
 
     private lateinit var viewModel: StartViewModel
     private lateinit var binding: StartFragmentBinding
+
+
+    override fun startLoginFragment() {
+        val action = StartFragmentDirections.actionStartFragmentToLoginFragment()
+        findNavController().navigate(action)
+    }
+
+    override fun startRegistrationFragment() {
+        val action = StartFragmentDirections.actionStartFragmentToRegistrationFragment()
+        findNavController().navigate(action)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,15 +40,5 @@ class StartFragment : Fragment(), FragmentNavigator {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, StartViewModelFactory(this)).get(StartViewModel::class.java)
         binding.viewmodel = viewModel
-    }
-
-    override fun startLoginFragment() {
-        val action = StartFragmentDirections.actionStartFragmentToLoginFragment()
-        findNavController().navigate(action)
-    }
-
-    override fun startRegistrationFragment() {
-        val action = StartFragmentDirections.actionStartFragmentToRegistrationFragment()
-        findNavController().navigate(action)
     }
 }

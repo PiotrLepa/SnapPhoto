@@ -19,5 +19,10 @@
     <fragment android:id="@+id/loginFragment"
               android:name="com.example.snapphoto.ui.start.login.LoginFragment"
               android:label=""
-              tools:layout="@layout/login_fragment"/>
+              tools:layout="@layout/login_fragment">
+        <action android:id="@+id/action_loginFragment_to_mainActivity" app:destination="@id/mainActivity"
+                app:popUpTo="@+id/mainActivity"/>
+    </fragment>
+    <activity android:id="@+id/mainActivity" android:name="com.example.snapphoto.ui.main.MainActivity"
+              android:label="activity_main" tools:layout="@layout/activity_main"/>
 </navigation>

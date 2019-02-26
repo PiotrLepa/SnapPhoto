@@ -28,10 +28,12 @@ class ProgressButton @JvmOverloads constructor(
         set(value) {
             field = value
             if (value) {
+                isEnabled = false
                 progressBarVisibility = true
                 labelText.text = onLoadingText
                 setBackgroundGradientDrawable()
             } else {
+                isEnabled = true
                 progressBarVisibility = false
                 labelText.text = text
                 setBackgroundGradientDrawable()
@@ -84,7 +86,8 @@ class ProgressButton @JvmOverloads constructor(
     companion object {
         private val states = arrayOf(
             intArrayOf(android.R.attr.state_pressed),
-            intArrayOf(android.R.attr.state_enabled)
+            intArrayOf(android.R.attr.state_enabled),
+            intArrayOf(-android.R.attr.state_enabled)
         )
     }
 
@@ -126,7 +129,7 @@ class ProgressButton @JvmOverloads constructor(
         shape.shape = GradientDrawable.RECTANGLE
         shape.cornerRadius = cornerRadius
 
-        val colors = intArrayOf(onPressBackgroundColor, defaultBackgroundColor)
+        val colors = intArrayOf(onPressBackgroundColor, defaultBackgroundColor, Color.LTGRAY)
         shape.color = ColorStateList(states, colors)
 
         this.background = shape

@@ -7,14 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.LoginFragmentBinding
 
-class LoginFragment : Fragment() {
+class LoginFragment : Fragment(), LoginFragmentNavigator {
 
     private lateinit var viewModel: LoginViewModel
     private lateinit var binding: LoginFragmentBinding
+
+    override fun startMainActivity() {
+        val action = LoginFragmentDirections.actionLoginFragmentToMainActivity()
+        findNavController().navigate(action)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +32,8 @@ class LoginFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, LoginViewModelFactory).get(LoginViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, LoginViewModelFactory(this))
+            .get(LoginViewModel::class.java)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
     }
