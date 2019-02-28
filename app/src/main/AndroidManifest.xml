@@ -3,7 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools" package="com.example.snapphoto">
 
     <application
-            android:name=".SnapPhotoApplication"
+            android:name=".SnapphotoApplication"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"

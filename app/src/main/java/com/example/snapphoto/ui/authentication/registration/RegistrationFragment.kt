@@ -12,8 +12,16 @@ import androidx.databinding.DataBindingUtil
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.RegistrationFragmentBinding
 import com.example.snapphoto.ui.main.MainActivity
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.factory
 
-class RegistrationFragment : Fragment(), RegistrationFragmentNavigator {
+class RegistrationFragment : Fragment(), RegistrationFragmentNavigator, KodeinAware {
+
+    override val kodein: Kodein by closestKodein()
+    private val viewModelFactoryInstanceFactory
+            : ((RegistrationFragmentNavigator) -> RegistrationViewModelFactory) by factory()
 
     private lateinit var viewModel: RegistrationViewModel
     private lateinit var binding: RegistrationFragmentBinding
@@ -35,7 +43,7 @@ class RegistrationFragment : Fragment(), RegistrationFragmentNavigator {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, RegistrationViewModelFactory(this))
+        viewModel = ViewModelProviders.of(this, viewModelFactoryInstanceFactory(this))
             .get(RegistrationViewModel::class.java)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this

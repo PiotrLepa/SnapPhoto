@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.snapphoto.data.entity.User
+import com.example.snapphoto.data.repository.SnapphotoRepository
+import com.example.snapphoto.data.repository.SnapphotoRepositoryImpl
 import com.example.snapphoto.internal.FieldIsNotFilledException
 import com.example.snapphoto.internal.PasswordsAreDifferentException
 import com.example.snapphoto.internal.await
@@ -12,7 +15,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class RegistrationViewModel(
-    private val registrationFragmentNavigator: RegistrationFragmentNavigator
+    private val registrationFragmentNavigator: RegistrationFragmentNavigator,
+    private val snapphotoRepository: SnapphotoRepository
 ) : ViewModel() {
 
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -34,11 +38,18 @@ class RegistrationViewModel(
         Timber.d("onSignUpButtonClicked: started")
         launchCreateUser {
             Timber.d("signUpButtonClicked: emailTextInput: ${emailTextInput.value}, passwordTextInput: ${passwordTextInput.value}")
+            val username = usernameTextInput.value.toString()
+            val email = emailTextInput.value.toString()
+            val password = passwordTextInput.value.toString()
             mAuth.createUserWithEmailAndPassword(
-                    emailTextInput.value.toString(),
-                    passwordTextInput.value.toString()
+                email, password
             ).await()
-            sendVerificationEmail()
+            val user = User(
+                FirebaseAuth.getInstance().currentUser!!.uid,
+                username,
+                email
+            )
+            snapphotoRepository.saveUser(user)
             navigateToMainScreen()
         }
     }
@@ -75,13 +86,6 @@ class RegistrationViewModel(
 
     private fun arePasswordDifferent() =
         passwordTextInput.value != confirmPasswordTextInput.value
-
-    private suspend fun sendVerificationEmail() {
-        Timber.d("sendVerificationEmail: started")
-        mAuth.currentUser?.apply {
-            sendEmailVerification().await()
-        }
-    }
 
     private fun navigateToMainScreen() {
         Timber.d("navigateToMainScreen: started")
