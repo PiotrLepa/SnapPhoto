@@ -1,4 +1,4 @@
-package com.example.snapphoto.ui.start.registration
+package com.example.snapphoto.ui.authentication.registration
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

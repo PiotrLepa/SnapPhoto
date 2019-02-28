@@ -4,12 +4,12 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="viewmodel" type="com.example.snapphoto.ui.start.login.LoginViewModel"/>
+        <variable name="viewmodel" type="com.example.snapphoto.ui.authentication.login.LoginViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.start.login.LoginFragment">
+            tools:context=".ui.authentication.login.LoginFragment">
 
         <TextView
                 android:text="@string/log_in"

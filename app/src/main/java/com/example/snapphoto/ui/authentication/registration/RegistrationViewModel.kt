@@ -1,4 +1,4 @@
-package com.example.snapphoto.ui.start.registration
+package com.example.snapphoto.ui.authentication.registration
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.snapphoto.internal.FieldIsNotFilledException
 import com.example.snapphoto.internal.PasswordsAreDifferentException
 import com.example.snapphoto.internal.await
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import timber.log.Timber

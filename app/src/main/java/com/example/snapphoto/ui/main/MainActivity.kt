@@ -4,9 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.snapphoto.R
-import com.example.snapphoto.ui.start.StartActivity
+import com.example.snapphoto.ui.authentication.AuthenticationActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,19 +17,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
-        logOutButton.setOnClickListener {
-            mAuth.signOut()
-            startStartActivity()
-        }
+//        logOutButton.setOnClickListener {
+//            mAuth.signOut()
+//            startStartActivity()
+//        }
     }
 
     override fun onStart() {
         super.onStart()
+        Timber.d("onStart: currentUser: ${mAuth.currentUser}")
         if (mAuth.currentUser == null) startStartActivity()
     }
 
     private fun startStartActivity() {
-        val intent = Intent(this, StartActivity::class.java)
+        //use this way to launch activity to clear task
+        val intent = Intent(this, AuthenticationActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }

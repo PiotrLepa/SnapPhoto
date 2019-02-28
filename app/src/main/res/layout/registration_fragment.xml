@@ -3,12 +3,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"/>
-        <variable name="viewmodel" type="com.example.snapphoto.ui.start.registration.RegistrationViewModel"/>
+        <variable name="viewmodel" type="com.example.snapphoto.ui.authentication.registration.RegistrationViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.start.registration.RegistrationFragment">
+            tools:context=".ui.authentication.registration.RegistrationFragment">
 
         <TextView
                 android:text="@string/sign_up"

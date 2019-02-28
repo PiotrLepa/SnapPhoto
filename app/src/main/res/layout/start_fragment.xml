@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="viewmodel" type="com.example.snapphoto.ui.start.start.StartViewModel"/>
+        <variable name="viewmodel" type="com.example.snapphoto.ui.authentication.start.StartViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.start.start.StartFragment"
+            tools:context=".ui.authentication.start.StartFragment"
             android:background="@color/colorYellow">
         <ImageView
                 android:src="@drawable/logo_white"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_screen_navigation"
+            app:startDestination="@id/mainFragment">
+
+    <fragment android:id="@+id/mainFragment" android:name="com.example.snapphoto.ui.main.MainFragment"
+              android:label="main_fragment" tools:layout="@layout/main_fragment">
+        <action android:id="@+id/action_mainFragment_to_startActivity" app:destination="@id/startActivity"
+        />
+    </fragment>
+    <activity android:id="@+id/startActivity" android:name="com.example.snapphoto.ui.authentication.AuthenticationActivity"
+              android:label="activity_start" tools:layout="@layout/activity_authentication"/>
+</navigation>

@@ -1,4 +1,4 @@
-package com.example.snapphoto.ui.start.start
+package com.example.snapphoto.ui.authentication.start
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle

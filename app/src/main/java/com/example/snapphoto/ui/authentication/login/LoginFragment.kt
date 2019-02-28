@@ -1,5 +1,6 @@
-package com.example.snapphoto.ui.start.login
+package com.example.snapphoto.ui.authentication.login
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.LoginFragmentBinding
+import com.example.snapphoto.ui.main.MainActivity
 
 class LoginFragment : Fragment(), LoginFragmentNavigator {
 
@@ -18,8 +19,10 @@ class LoginFragment : Fragment(), LoginFragmentNavigator {
     private lateinit var binding: LoginFragmentBinding
 
     override fun startMainActivity() {
-        val action = LoginFragmentDirections.actionLoginFragmentToMainActivity()
-        findNavController().navigate(action)
+        //use this way to launch activity to clear task
+        val intent = Intent(context, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun onCreateView(

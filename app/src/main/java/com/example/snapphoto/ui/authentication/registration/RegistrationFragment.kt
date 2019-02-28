@@ -1,5 +1,6 @@
-package com.example.snapphoto.ui.start.registration
+package com.example.snapphoto.ui.authentication.registration
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.RegistrationFragmentBinding
+import com.example.snapphoto.ui.main.MainActivity
 
 class RegistrationFragment : Fragment(), RegistrationFragmentNavigator {
 
@@ -17,7 +19,10 @@ class RegistrationFragment : Fragment(), RegistrationFragmentNavigator {
     private lateinit var binding: RegistrationFragmentBinding
 
     override fun startMainActivity() {
-        RegistrationFragmentDirections.actionRegistrationFragmentToMainActivity()
+        //use this way to launch activity to clear task
+        val intent = Intent(context, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     override fun onCreateView(

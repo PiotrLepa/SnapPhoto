@@ -1,4 +1,4 @@
-package com.example.snapphoto.ui.start.login
+package com.example.snapphoto.ui.authentication.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
