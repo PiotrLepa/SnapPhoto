@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.snapphoto.internal.FieldIsNotFilledException
 import com.example.snapphoto.internal.await
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
@@ -18,9 +19,9 @@ class LoginViewModel(
     val emailTextInput = MutableLiveData<String>()
     val passwordTextInput = MutableLiveData<String>()
 
-    private val _isLoginFailed = MutableLiveData<Boolean>(false)
-    val isLoginFailed: LiveData<Boolean>
-        get() = _isLoginFailed
+    private val _errorMessage = MutableLiveData<Exception>()
+    val errorMessage: LiveData<Exception>
+        get() = _errorMessage
 
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
@@ -28,38 +29,41 @@ class LoginViewModel(
 
     fun logInButtonClicked() {
         Timber.d("logInButtonClicked: started")
-        _isLoginFailed.value = false
-        if (!areFieldsEmpty()) {
-            launchSignInUser {
-                mAuth.signInWithEmailAndPassword(
-                    emailTextInput.value.toString(),
-                    passwordTextInput.value.toString())
-                    .await()
-                navigateToMainScreen()
-            }
-        } else {
-            _isLoginFailed.value = true
+        launchSignInUser {
+            Timber.d("logInButtonClicked: emailTextInput: ${emailTextInput.value}, passwordTextInput: ${passwordTextInput.value}")
+            mAuth.signInWithEmailAndPassword(
+                emailTextInput.value.toString(),
+                passwordTextInput.value.toString()
+            ).await()
+            navigateToMainScreen()
         }
     }
 
-    private fun areFieldsEmpty() =
-        emailTextInput.value.isNullOrEmpty() || passwordTextInput.value.isNullOrEmpty()
-
     private fun launchSignInUser(block: suspend () -> Unit) {
+        if (areFieldsEmpty()) {
+            _errorMessage.value = FieldIsNotFilledException()
+            return
+        }
         viewModelScope.launch {
             try {
+                _errorMessage.value = null
                 _isLoading.value = true
                 block()
             } catch (e: Exception) {
-                Timber.e("logInButtonClicked: Login Failed: Exception: ${e.message}")
-                _isLoginFailed.value = true
+                Timber.e("launchSignInUser: Login failed: Exception: ${e.message}")
+                _errorMessage.value = e
             } finally {
                 _isLoading.value = false
             }
         }
     }
 
+    private fun areFieldsEmpty() =
+        emailTextInput.value.isNullOrEmpty()
+                || passwordTextInput.value.isNullOrEmpty()
+
     private fun navigateToMainScreen() {
+        Timber.d("navigateToMainScreen: started")
         loginFragmentNavigator.startMainActivity()
     }
 }

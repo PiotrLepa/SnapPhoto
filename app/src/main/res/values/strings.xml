@@ -9,5 +9,6 @@
     <string name="password">password</string>
     <string name="confirm_password">confirm password</string>
     <string name="username">username</string>
-    <string name="email_or_password_are_incorrect">Your email or password is incorrect.</string>
+    <string name="please_fill_all_fields">Please fill all fields.</string>
+    <string name="passwords_are_different">Passwords are different.</string>
 </resources>

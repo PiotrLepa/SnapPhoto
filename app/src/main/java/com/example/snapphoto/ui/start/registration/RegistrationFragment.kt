@@ -11,10 +11,14 @@ import androidx.databinding.DataBindingUtil
 import com.example.snapphoto.R
 import com.example.snapphoto.databinding.RegistrationFragmentBinding
 
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(), RegistrationFragmentNavigator {
 
     private lateinit var viewModel: RegistrationViewModel
     private lateinit var binding: RegistrationFragmentBinding
+
+    override fun startMainActivity() {
+        RegistrationFragmentDirections.actionRegistrationFragmentToMainActivity()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +30,8 @@ class RegistrationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(RegistrationViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, RegistrationViewModelFactory(this))
+            .get(RegistrationViewModel::class.java)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = this
     }

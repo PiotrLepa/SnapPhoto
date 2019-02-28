@@ -31,10 +31,8 @@
         <item name="android:textColor">@color/colorBlue</item>
     </style>
 
-    <style name="SnapPhotoTextInputLayoutStyle" parent="Widget.Design.TextInputLayout">
-        <item name="android:textColorHint">@color/colorBlue</item>
-        <item name="hintTextAppearance">@style/TextAppearance.App.TextInputLayout</item>
-        <item name="android:layout_marginTop">5dp</item>
+    <style name="SnapPhotoTextInputLayoutStyle" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="boxStrokeColor">@color/colorBlue</item>
     </style>
 
 </resources>
