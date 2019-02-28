@@ -1,4 +1,4 @@
-package com.example.snapphoto.ui.main
+package com.example.snapphoto.ui.main.camera
 
 import android.content.Intent
 import androidx.lifecycle.ViewModelProviders
@@ -13,9 +13,9 @@ import com.example.snapphoto.ui.authentication.AuthenticationActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.main_fragment.*
 
-class MainFragment : Fragment() {
+class CameraFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: CameraViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,19 +26,7 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(CameraViewModel::class.java)
         // TODO: Use the ViewModel
-
-        logOutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            startStartActivity()
-        }
-    }
-
-    private fun startStartActivity() {
-        //use this way to launch activity to clear task
-        val intent = Intent(context, AuthenticationActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
     }
 }

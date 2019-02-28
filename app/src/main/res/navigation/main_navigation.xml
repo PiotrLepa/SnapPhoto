@@ -4,11 +4,22 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_screen_navigation"
             app:startDestination="@id/mainFragment">
 
-    <fragment android:id="@+id/mainFragment" android:name="com.example.snapphoto.ui.main.MainFragment"
+    <fragment android:id="@+id/mainFragment" android:name="com.example.snapphoto.ui.main.camera.CameraFragment"
               android:label="main_fragment" tools:layout="@layout/main_fragment">
         <action android:id="@+id/action_mainFragment_to_startActivity" app:destination="@id/startActivity"
         />
+        <action android:id="@+id/action_mainFragment_to_friendsFragment" app:destination="@id/friendsFragment"/>
+        <action android:id="@+id/action_mainFragment_to_storiesFragment" app:destination="@id/storiesFragment"/>
+        <action android:id="@+id/action_mainFragment_to_storiesFragment2" app:destination="@id/storiesFragment"/>
     </fragment>
     <activity android:id="@+id/startActivity" android:name="com.example.snapphoto.ui.authentication.AuthenticationActivity"
               android:label="activity_start" tools:layout="@layout/activity_authentication"/>
+    <fragment android:id="@+id/friendsFragment" android:name="com.example.snapphoto.ui.main.friends.FriendsFragment"
+              android:label="friends_fragment" tools:layout="@layout/friends_fragment">
+        <action android:id="@+id/action_friendsFragment_to_mainFragment" app:destination="@id/mainFragment"/>
+    </fragment>
+    <fragment android:id="@+id/storiesFragment" android:name="com.example.snapphoto.ui.main.stories.StoriesFragment"
+              android:label="stories_fragment" tools:layout="@layout/stories_fragment">
+        <action android:id="@+id/action_storiesFragment_to_mainFragment" app:destination="@id/mainFragment"/>
+    </fragment>
 </navigation>
