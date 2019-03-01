@@ -38,23 +38,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAuth = FirebaseAuth.getInstance()
-//        logOutButton.setOnClickListener {
-//            mAuth.signOut()
-//            startStartActivity()
-//        }
 
         previewCameraManager = PreviewCameraManager(this, textureView)
 
-        val fragmentsList = listOf(
-            FriendsFragment(),
-            Fragment(),
-            StoriesFragment()
-        )
-
-        val pagerAdapter = ScreenSlidePageAdapter(supportFragmentManager, fragmentsList)
-        viewPager.adapter = pagerAdapter
-        viewPager.offscreenPageLimit = 2
-        viewPager.currentItem = FRAGMENT_CAMERA
+        setupViewPager()
     }
 
 
@@ -93,6 +80,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         }
+    }
+
+    private fun setupViewPager() {
+        val fragmentsList = listOf(
+            FriendsFragment(),
+            Fragment(),
+            StoriesFragment()
+        )
+
+        val pagerAdapter = ScreenSlidePageAdapter(supportFragmentManager, fragmentsList)
+        viewPager.adapter = pagerAdapter
+        viewPager.offscreenPageLimit = 2
+        viewPager.currentItem = FRAGMENT_CAMERA
+
+        tabsView.setupWithViewPager(viewPager)
     }
 
     private fun startStartActivity() {
