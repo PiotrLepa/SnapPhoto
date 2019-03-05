@@ -10,6 +10,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.example.snapphoto.R
+import com.example.snapphoto.internal.FRAGMENT_CAMERA
+import com.example.snapphoto.internal.FRAGMENT_FRIENDS
 import kotlinx.android.synthetic.main.view_snapphoto_tabs.view.*
 import timber.log.Timber
 
@@ -31,9 +33,6 @@ class SnapphotoTabsView @JvmOverloads constructor(
         View.inflate(context, R.layout.view_snapphoto_tabs, this)
         captureImage.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
-                Timber.d(": captureImage.x: ${captureImage.x}, friendsImage.x: ${friendsImage.x}, friendsImage.width: ${friendsImage.width}")
-                Timber.d(": captureImage.y: ${captureImage.y}, savedPhotosImage.bottom: ${savedPhotosImage.bottom}, captureImage.height: ${captureImage.height}")
-
                 val slideWidgetFromCenterDistance = (storiesImage.x - friendsImage.x) / 4
                 mSideWidgetsEndTranslationX = slideWidgetFromCenterDistance - 40
                 mIndicatorEndTranslationX = slideWidgetFromCenterDistance + 40
@@ -48,13 +47,13 @@ class SnapphotoTabsView @JvmOverloads constructor(
     }
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-        if (position == 0) {
+        if (position == FRAGMENT_FRIENDS) {
             setWidgetColor(1 - positionOffset)
             moveAndScaleSideWidgets(1 - positionOffset)
             moveAndScaleCenterWidgets(1 - positionOffset)
             moveAndScaleIndicatorWidget(positionOffset - 1)
             indicatorView.alpha = 1 - positionOffset
-        } else if (position == 1) {
+        } else if (position == FRAGMENT_CAMERA) {
             setWidgetColor(positionOffset)
             moveAndScaleSideWidgets(positionOffset)
             moveAndScaleCenterWidgets(positionOffset)

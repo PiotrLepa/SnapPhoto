@@ -4,11 +4,13 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.friends.FriendsFragment">
+        tools:context=".ui.main.friends.FriendsFragment"
+        android:background="@drawable/view_pager_background">
 
     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Hello"/>
 
 </FrameLayout>

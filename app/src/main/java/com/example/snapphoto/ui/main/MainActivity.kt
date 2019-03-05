@@ -11,7 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.example.snapphoto.R
+import com.example.snapphoto.internal.CAMERA_AND_STORAGE_PERMISSION_CODE
+import com.example.snapphoto.internal.FRAGMENT_CAMERA
+import com.example.snapphoto.internal.FRAGMENT_FRIENDS
 import com.example.snapphoto.internal.PreviewCameraManager
 import com.example.snapphoto.ui.authentication.AuthenticationActivity
 import com.example.snapphoto.ui.main.friends.FriendsFragment
@@ -20,16 +24,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
-const val FRAGMENT_FRIENDS = 0
-const val FRAGMENT_CAMERA = 1
-const val FRAGMENT_STORIES = 2
-
 class MainActivity : AppCompatActivity() {
-
-    companion object {
-        private const val CAMERA_AND_STORAGE_PERMISSION_CODE = 8343
-    }
-
     private lateinit var mAuth: FirebaseAuth
     private lateinit var previewCameraManager: PreviewCameraManager
 
@@ -43,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
         setupViewPager()
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -73,8 +67,7 @@ class MainActivity : AppCompatActivity() {
                 || grantResults[0] != PackageManager.PERMISSION_GRANTED
                 || grantResults[1] != PackageManager.PERMISSION_GRANTED
                 || grantResults[2] != PackageManager.PERMISSION_GRANTED) {
-//                ErrorDialog.newInstance(getString(R.string.request_permission))
-//                    .show(childFragmentManager, FRAGMENT_DIALOG)
+                //TODO if permission denied show error screen
                 Toast.makeText(this, "Permissions denied", Toast.LENGTH_SHORT).show()
             }
         } else {
@@ -85,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewPager() {
         val fragmentsList = listOf(
             FriendsFragment(),
-            Fragment(),
+            Fragment(), //empty fragment
             StoriesFragment()
         )
 
@@ -95,6 +88,25 @@ class MainActivity : AppCompatActivity() {
         viewPager.currentItem = FRAGMENT_CAMERA
 
         tabsView.setupWithViewPager(viewPager)
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                if (position == FRAGMENT_FRIENDS) {
+                    backgroundView.setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.colorBlue))
+                    backgroundView.alpha = 1 - positionOffset
+                } else if (position == FRAGMENT_CAMERA) {
+                    backgroundView.setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.colorPurple))
+                    backgroundView.alpha = positionOffset
+                }
+            }
+
+            override fun onPageSelected(position: Int) {
+            }
+        })
     }
 
     private fun startStartActivity() {
@@ -114,7 +126,6 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
 
 
     private fun requestPermission() {
