@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="actionBarIcon">35dp</dimen>
+    <dimen name="actionBarIcon">30dp</dimen>
+    <dimen name="marginToolbarIcon">14dp</dimen>
+    <dimen name="marginToolbarFlashIcon">28dp</dimen> <!-- 2 * @dimen/marginToolbarIcon-->
+    <dimen name="bottomMarginSpace">44dp</dimen> <!--@dimen/actionBarIcon + margin from toolbar-->
 </resources>

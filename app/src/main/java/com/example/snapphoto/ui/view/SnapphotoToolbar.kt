@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.snapphoto.R
+import kotlinx.android.synthetic.main.toolbar_snapphoto.view.*
 
 class SnapphotoToolbar @JvmOverloads constructor(
     context: Context,
@@ -14,5 +15,14 @@ class SnapphotoToolbar @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.toolbar_snapphoto, this)
+        adjustToolbarToStatusBarSize()
+    }
+
+    private fun adjustToolbarToStatusBarSize() {
+        setOnApplyWindowInsetsListener { v, insets ->
+            val statusBarSize = insets.systemWindowInsetTop
+            guideline.setGuidelineBegin(statusBarSize)
+            insets
+        }
     }
 }
