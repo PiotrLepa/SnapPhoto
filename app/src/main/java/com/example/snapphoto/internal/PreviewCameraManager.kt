@@ -15,10 +15,10 @@ import android.view.TextureView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.snapphoto.ui.view.AutoFitTextureView
 import timber.log.Timber
-import java.util.*
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
 import android.graphics.SurfaceTexture
+import java.util.*
 
 
 class PreviewCameraManager(
@@ -219,6 +219,7 @@ class PreviewCameraManager(
                 ) ?: continue
                 //TODO
                 Timber.d("setUpCameraOutputs: CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP: ${Arrays.toString(map.getOutputSizes(ImageFormat.JPEG))}")
+                Timber.d("setUpCameraOutputs: CALER_STREAM_CONFIGURATION_MAP SurfaceTexture::class.java: ${Arrays.toString(map.getOutputSizes(SurfaceTexture::class.java))}")
 
                 val largest = getFullScreenPreview(
                     map.getOutputSizes(ImageFormat.JPEG),
@@ -376,6 +377,7 @@ class PreviewCameraManager(
     private fun createCameraPreviewSession() {
         try {
             val surfaceTexture = textureView.surfaceTexture
+            Timber.d("createCameraPreviewSession: previewSize.width: ${previewSize.width}, previewSize.height: ${previewSize.height}")
             surfaceTexture.setDefaultBufferSize(previewSize.width, previewSize.height)
 
             // This is the output Surface we need to start preview.
