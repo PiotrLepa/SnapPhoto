@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:background="@color/colorBlue">
 
+    <ImageView
+            android:layout_height="@dimen/actionBarIcon" app:srcCompat="@drawable/default_user"
+            android:id="@+id/userImage"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_width="@dimen/actionBarIcon"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+            app:srcCompat="@drawable/ic_search_white_40dp"
+            android:id="@+id/searchImage"
+            app:layout_constraintStart_toEndOf="@+id/userImage"
+            app:layout_constraintBottom_toBottomOf="@+id/userImage"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/userImage" android:layout_height="@dimen/actionBarIcon"
+            android:layout_width="@dimen/actionBarIcon"/>
+    <EditText
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:inputType="text"
+            android:text="@string/search"
+            android:ems="10"
+            android:id="@+id/searchEditText"
+            android:background="@null"
+            android:textColor="@android:color/white"
+            app:layout_constraintStart_toEndOf="@+id/searchImage" android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@+id/searchImage"
+            app:layout_constraintBottom_toBottomOf="@+id/searchImage" android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/addFriendImage" app:layout_constraintHorizontal_bias="0.0"/>
+    <ImageView
+            android:layout_height="@dimen/actionBarIcon" app:srcCompat="@drawable/ic_camera_front_white_40dp"
+            android:id="@+id/switchCameraLensImage" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintTop_toTopOf="@+id/addFriendImage"
+            app:layout_constraintBottom_toBottomOf="@+id/addFriendImage" android:layout_width="@dimen/actionBarIcon"/>
+    <ImageView
+            android:layout_height="@dimen/actionBarIcon" app:srcCompat="@drawable/ic_friend_add_white_40dp"
+            android:id="@+id/addFriendImage"
+            app:layout_constraintTop_toTopOf="@+id/searchEditText"
+            app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
+            app:layout_constraintEnd_toStartOf="@+id/switchCameraLensImage" android:layout_marginEnd="8dp"
+            android:layout_width="@dimen/actionBarIcon"/>
+    <ImageView
+            android:layout_width="@dimen/actionBarIcon"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/ic_flash_off_white_40dp"
+            android:id="@+id/flashImage" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/switchCameraLensImage"
+            app:layout_constraintEnd_toEndOf="@+id/switchCameraLensImage"
+            app:layout_constraintStart_toStartOf="@+id/switchCameraLensImage"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

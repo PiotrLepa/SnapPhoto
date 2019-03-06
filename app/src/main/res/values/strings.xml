@@ -11,4 +11,5 @@
     <string name="username">username</string>
     <string name="please_fill_all_fields">Please fill all fields.</string>
     <string name="passwords_are_different">Passwords are different.</string>
+    <string name="search">search</string>
 </resources>
