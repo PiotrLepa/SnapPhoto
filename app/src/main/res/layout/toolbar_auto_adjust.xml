@@ -46,8 +46,15 @@
             android:id="@+id/addFriendImage"
             app:layout_constraintTop_toTopOf="@+id/searchEditText"
             app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
-            app:layout_constraintEnd_toStartOf="@+id/switchCameraLensImage" android:layout_marginEnd="@dimen/marginToolbarIcon"
-            android:layout_width="@dimen/actionBarIcon"/>
+            app:layout_constraintEnd_toStartOf="@+id/switchCameraLensImage"
+            android:layout_width="@dimen/actionBarIcon" android:layout_marginEnd="@dimen/marginToolbarIcon"/>
+    <ImageView
+            android:layout_height="@dimen/actionBarIcon" app:srcCompat="@drawable/ic_chat_white_40dp"
+            android:id="@+id/newMessageImage"
+            app:layout_constraintTop_toTopOf="@+id/addFriendImage"
+            app:layout_constraintBottom_toBottomOf="@+id/addFriendImage" android:layout_width="@dimen/actionBarIcon"
+            android:alpha="0" app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/addFriendImage" android:layout_marginEnd="@dimen/marginToolbarIcon"/>
     <ImageView
             android:layout_height="@dimen/actionBarIcon" app:srcCompat="@drawable/ic_camera_front_white_40dp"
             android:id="@+id/switchCameraLensImage" app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +64,7 @@
     <ImageView
             android:layout_width="@dimen/actionBarIcon"
             android:layout_height="@dimen/actionBarIcon" app:srcCompat="@drawable/ic_flash_off_white_40dp"
-            android:id="@+id/flashImage"
+            android:id="@+id/cameraFlashImage"
             app:layout_constraintTop_toBottomOf="@+id/switchCameraLensImage"
             app:layout_constraintEnd_toEndOf="@+id/switchCameraLensImage"
             app:layout_constraintStart_toStartOf="@+id/switchCameraLensImage"

@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.currentItem = FRAGMENT_CAMERA
 
         tabsView.setupWithViewPager(viewPager)
+        autoAdjustToolbar.setupWithViewPager(viewPager)
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 

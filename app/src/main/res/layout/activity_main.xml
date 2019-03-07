@@ -21,19 +21,19 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.example.snapphoto.ui.view.SnapphotoToolbar
+    <com.example.snapphoto.ui.view.AutoAdjustToolbar
             android:layout_width="0dp"
             android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/backgroundView"
-            android:id="@+id/snapphotoToolbar"/>
+            android:id="@+id/autoAdjustToolbar"/>
 
     <Space
             android:id="@+id/toolbarHeightSpace"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="@dimen/bottomMarginSpace"
-            app:layout_constraintBottom_toBottomOf="@+id/snapphotoToolbar"
+            app:layout_constraintBottom_toBottomOf="@+id/autoAdjustToolbar"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="0dp"/>
 
