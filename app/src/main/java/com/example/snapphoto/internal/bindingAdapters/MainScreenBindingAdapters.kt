@@ -1,7 +1,9 @@
 package com.example.snapphoto.internal.bindingAdapters
 
-import android.content.Context
+import android.annotation.SuppressLint
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.*
@@ -11,11 +13,12 @@ import androidx.fragment.app.Fragment
 import com.example.snapphoto.R
 import com.example.snapphoto.internal.FRAGMENT_CAMERA
 import com.example.snapphoto.internal.FRAGMENT_FRIENDS
+import com.example.snapphoto.internal.VERTICAL_FRAGMENT_SAVED_PHOTOS
 import com.example.snapphoto.internal.adapters.ScreenSlidePageAdapter
-import com.example.snapphoto.ui.main.friends.FriendsFragment
-import com.example.snapphoto.ui.main.stories.StoriesFragment
 import com.example.snapphoto.ui.view.AutoAdjustToolbar
 import com.example.snapphoto.ui.view.SnapphotoTabsView
+import com.example.snapphoto.ui.view.VerticalViewPager
+import timber.log.Timber
 
 
 @BindingMethods(
@@ -29,19 +32,22 @@ import com.example.snapphoto.ui.view.SnapphotoTabsView
 )
 object MainScreenBindingAdapters {
 
-//    @JvmStatic fun onWidgetClicked(view: SnapphotoTabsView, listenerBlock: () -> Unit) {
-//        when (view.id) {
-//            R.id.friendsImage -> null
-//            R.id.captureImage -> null
-//            R.id.storiesImage -> null
-//            R.id.savedPhotosImage -> return
-//        }
-//    }
-
-
+    @SuppressLint("ClickableViewAccessibility")
+    @BindingAdapter("interceptAllTouchEventsWhenOpen")
+    @JvmStatic fun interceptAllTouchEventsWhenOpen(verticalViewPager: VerticalViewPager, currentPage: Int) {
+        verticalViewPager.setOnTouchListener { v, event ->
+            if (currentPage == VERTICAL_FRAGMENT_SAVED_PHOTOS) {
+                if (event.action == MotionEvent.ACTION_DOWN && v is ViewGroup) {
+                    v.requestDisallowInterceptTouchEvent(true)
+                }
+            }
+            false
+        }
+    }
 
     @BindingAdapter("setupWithViewPager")
     @JvmStatic fun setupWithViewPager(backgroundView: View, viewPager: ViewPager) {
+        Timber.d("setupWithViewPager: ")
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -63,15 +69,9 @@ object MainScreenBindingAdapters {
     }
 
     @BindingAdapter("fragments")
-    @JvmStatic fun setFragments(viewPager: ViewPager, context: Context) {
-        val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-        val fragmentsList = listOf(
-            FriendsFragment(),
-            Fragment(),
-            StoriesFragment()
-        )
-        viewPager.adapter =
-            ScreenSlidePageAdapter(fragmentManager, fragmentsList)
+    @JvmStatic fun setFragments(viewPager: ViewPager, fragmentsList: List<Fragment>) {
+        val fragmentManager = (viewPager.context as AppCompatActivity).supportFragmentManager
+        viewPager.adapter = ScreenSlidePageAdapter(fragmentManager, fragmentsList)
     }
 
     @BindingAdapter(

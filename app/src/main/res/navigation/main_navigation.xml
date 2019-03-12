@@ -5,7 +5,7 @@
             app:startDestination="@id/mainFragment">
 
     <fragment android:id="@+id/mainFragment" android:name="com.example.snapphoto.ui.main.camera.CameraFragment"
-              android:label="main_fragment" tools:layout="@layout/main_fragment">
+              android:label="main_fragment" tools:layout="@layout/camera_fragment">
         <action android:id="@+id/action_mainFragment_to_startActivity" app:destination="@id/startActivity"
         />
         <action android:id="@+id/action_mainFragment_to_friendsFragment" app:destination="@id/friendsFragment"/>

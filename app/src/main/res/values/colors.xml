@@ -10,4 +10,5 @@
     <color name="colorLightGray">#CFD4DA</color>
     <color name="colorGray">#838282</color>
     <color name="colorPurple">#a05dce</color>
+    <color name="colorLightRed">##F23B57</color>
 </resources>
