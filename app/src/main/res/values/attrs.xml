@@ -17,4 +17,8 @@
         <attr name="onLoadingText" format="string"/>
         <attr name="startLoading" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="SnapphotoTabsView">
+        <attr name="onWidgetClick" format="reference"/>
+    </declare-styleable>
 </resources>

@@ -9,17 +9,25 @@ import android.view.ViewTreeObserver
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
-import com.example.snapphoto.R
 import com.example.snapphoto.internal.FRAGMENT_CAMERA
 import com.example.snapphoto.internal.FRAGMENT_FRIENDS
 import kotlinx.android.synthetic.main.view_snapphoto_tabs.view.*
-import timber.log.Timber
+import android.content.ContextWrapper
+import com.example.snapphoto.R
+import java.lang.reflect.InvocationTargetException
+import java.lang.reflect.Method
+
 
 class SnapphotoTabsView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr), ViewPager.OnPageChangeListener {
+
+    interface OnWidgetClickListener {
+        fun onWidgetClick(view: View)
+    }
+    private var onWidgetClickListener: OnWidgetClickListener? = null
 
     private val mArgbEvaluator = ArgbEvaluator()
     private val mCenterColor = Color.WHITE
@@ -31,6 +39,23 @@ class SnapphotoTabsView @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.view_snapphoto_tabs, this)
+        context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.SnapphotoTabsView,
+            0, 0).apply {
+            try {
+                if (context.isRestricted) {
+                    throw IllegalStateException("The android:onClick attribute cannot " + "be used within a restricted context")
+                }
+
+                val handlerName = getString(R.styleable.SnapphotoTabsView_onWidgetClick)
+                if (handlerName != null) {
+//                    setOnWidgetClickListener()
+                }
+            } finally {
+                recycle()
+            }
+        }
         captureImage.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 val slideWidgetFromCenterDistance = (storiesImage.x - friendsImage.x) / 4
@@ -41,6 +66,7 @@ class SnapphotoTabsView @JvmOverloads constructor(
                 captureImage.viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
         })
+        setupOnClickListeners()
     }
 
     override fun onPageScrollStateChanged(state: Int) {
@@ -67,6 +93,25 @@ class SnapphotoTabsView @JvmOverloads constructor(
 
     fun setupWithViewPager(viewPager: ViewPager) {
         viewPager.addOnPageChangeListener(this)
+    }
+
+    fun setOnWidgetClickListener(onWidgetClickListener: OnWidgetClickListener) {
+        this.onWidgetClickListener = onWidgetClickListener
+    }
+
+    private fun setupOnClickListeners() {
+        friendsImage.setOnClickListener {
+            onWidgetClickListener?.onWidgetClick(it)
+        }
+        captureImage.setOnClickListener {
+            onWidgetClickListener?.onWidgetClick(it)
+        }
+        storiesImage.setOnClickListener {
+            onWidgetClickListener?.onWidgetClick(it)
+        }
+        savedPhotosImage.setOnClickListener {
+            onWidgetClickListener?.onWidgetClick(it)
+        }
     }
 
     private fun moveAndScaleSideWidgets(positionOffset: Float) {

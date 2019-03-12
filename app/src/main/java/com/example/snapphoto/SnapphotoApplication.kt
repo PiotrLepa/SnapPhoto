@@ -7,10 +7,7 @@ import com.example.snapphoto.ui.authentication.registration.RegistrationFragment
 import com.example.snapphoto.ui.authentication.registration.RegistrationViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.factory
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 import timber.log.Timber
 
 class SnapphotoApplication : Application(), KodeinAware {
