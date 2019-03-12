@@ -42,13 +42,4 @@ object AuthenticationScreenBindingAdapters {
         }
         view.text = errorMessage
     }
-
-//    @JvmStatic fun onWidgetClicked(view: SnapphotoTabsView, listenerBlock: () -> Unit) {
-//        when (view.id) {
-//            R.id.friendsImage -> null
-//            R.id.captureImage -> null
-//            R.id.storiesImage -> null
-//            R.id.savedPhotosImage -> return
-//        }
-//    }
 }

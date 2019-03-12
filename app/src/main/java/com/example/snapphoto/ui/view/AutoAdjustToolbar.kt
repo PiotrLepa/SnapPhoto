@@ -68,6 +68,10 @@ class AutoAdjustToolbar @JvmOverloads constructor(
 
         newMessageImage.translationX = positionOffset * mWidgetsMaxTranslationX
         newMessageImage.alpha = ((positionOffset - 0.5) * 2).toFloat()
+
+        // fix bug that widget changed does not set translationX properly when
+        // viewpager swipe from Fragment Stories to Fragment Friends
+        addFriendImage.translationX = 0f
     }
 
     private fun moveToStoriesFragment(positionOffset: Float) {
@@ -77,6 +81,7 @@ class AutoAdjustToolbar @JvmOverloads constructor(
         switchCameraLensImage.alpha = 1 - positionOffset * 2
         cameraFlashImage.alpha = switchCameraLensImage.alpha
 
+        Timber.d("moveToStoriesFragment: mWidgetsMaxTranslationX/2 ${mWidgetsMaxTranslationX/2}")
         addFriendImage.translationX = positionOffset * mWidgetsMaxTranslationX/2
     }
 }

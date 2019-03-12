@@ -16,7 +16,6 @@ import com.example.snapphoto.ui.main.friends.FriendsFragment
 import com.example.snapphoto.ui.main.stories.StoriesFragment
 import com.example.snapphoto.ui.view.AutoAdjustToolbar
 import com.example.snapphoto.ui.view.SnapphotoTabsView
-import timber.log.Timber
 
 
 @BindingMethods(
@@ -29,6 +28,17 @@ import timber.log.Timber
     InverseBindingMethod(type = ViewPager::class, attribute = "android:currentPage", method = "getCurrentItem")
 )
 object MainScreenBindingAdapters {
+
+//    @JvmStatic fun onWidgetClicked(view: SnapphotoTabsView, listenerBlock: () -> Unit) {
+//        when (view.id) {
+//            R.id.friendsImage -> null
+//            R.id.captureImage -> null
+//            R.id.storiesImage -> null
+//            R.id.savedPhotosImage -> return
+//        }
+//    }
+
+
 
     @BindingAdapter("setupWithViewPager")
     @JvmStatic fun setupWithViewPager(backgroundView: View, viewPager: ViewPager) {
