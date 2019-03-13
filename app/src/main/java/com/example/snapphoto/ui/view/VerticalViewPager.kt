@@ -24,6 +24,7 @@ class VerticalViewPager @JvmOverloads constructor(
         return true
     }
 
+
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         val intercepted = super.onInterceptTouchEvent(swapXY(ev))
         swapXY(ev)
