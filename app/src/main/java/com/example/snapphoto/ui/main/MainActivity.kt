@@ -14,10 +14,8 @@ import com.example.snapphoto.R
 import com.example.snapphoto.databinding.ActivityMainBinding
 import com.example.snapphoto.internal.*
 import com.example.snapphoto.ui.authentication.AuthenticationActivity
-import com.example.snapphoto.ui.userProfile.UserProfileBottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.toolbar_auto_adjust.*
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -38,11 +36,6 @@ class MainActivity : AppCompatActivity() {
             LifecycleBoundCameraManager(this, PreviewCameraManager(this, textureView))
         } else {
             requestPermission()
-        }
-
-        userImage.setOnClickListener {
-            val bottomSheet = UserProfileBottomSheetDialogFragment.newInstance()
-            bottomSheet.show(supportFragmentManager, "bottomSheet")
         }
     }
 

@@ -6,15 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.size
 import androidx.databinding.*
 import androidx.viewpager.widget.ViewPager
 import androidx.databinding.adapters.ListenerUtil
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.snapphoto.R
 import com.example.snapphoto.internal.FRAGMENT_CAMERA
 import com.example.snapphoto.internal.FRAGMENT_FRIENDS
+import com.example.snapphoto.internal.USER_PROFILE_DIALOG_FRAGMENT
 import com.example.snapphoto.internal.VERTICAL_FRAGMENT_SAVED_PHOTOS
 import com.example.snapphoto.internal.adapters.ScreenSlidePageAdapter
+import com.example.snapphoto.ui.main.camera.CameraFragmentDirections
+import com.example.snapphoto.ui.userProfile.UserProfileDialogFragment
 import com.example.snapphoto.ui.view.AutoAdjustToolbar
 import com.example.snapphoto.ui.view.SnapphotoTabsView
 import com.example.snapphoto.ui.view.VerticalViewPager
@@ -31,6 +37,17 @@ import timber.log.Timber
     InverseBindingMethod(type = ViewPager::class, attribute = "android:currentPage", method = "getCurrentItem")
 )
 object MainScreenBindingAdapters {
+
+    @BindingAdapter("openDialogFragmentOnProfileImageClick")
+    @JvmStatic fun openDialogFragmentOnProfileImageClick(toolbar: AutoAdjustToolbar, shouldOpen: Boolean) {
+        if (!shouldOpen) return
+
+        toolbar.setOnUserImageClickListener(View.OnClickListener {
+            val fragmentManager = (toolbar.context as AppCompatActivity).supportFragmentManager
+            val dialogFragment = UserProfileDialogFragment.newInstance()
+            dialogFragment.show(fragmentManager, USER_PROFILE_DIALOG_FRAGMENT)
+        })
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     @BindingAdapter("interceptAllTouchEventsWhenOpen")

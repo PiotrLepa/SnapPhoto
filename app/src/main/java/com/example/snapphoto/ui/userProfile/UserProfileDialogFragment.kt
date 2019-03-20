@@ -1,23 +1,22 @@
 package com.example.snapphoto.ui.userProfile
 
-import android.app.Dialog
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.fragment.app.DialogFragment
 
 import com.example.snapphoto.R
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import timber.log.Timber
 
-class UserProfileBottomSheetDialogFragment : BottomSheetDialogFragment() {
+class UserProfileDialogFragment : BottomSheetDialogFragment() {
 
     companion object {
-        fun newInstance() = UserProfileBottomSheetDialogFragment()
+        fun newInstance() = UserProfileDialogFragment()
     }
 
     private lateinit var viewModel: UserProfileViewModel
@@ -26,8 +25,8 @@ class UserProfileBottomSheetDialogFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.user_profile_fragment, container, false)
-        view.findViewById<TextView>(R.id.textView2).setOnClickListener {
+        val view =  inflater.inflate(R.layout.user_profile_dialog_fragment, container, false)
+        view.findViewById<ImageView>(R.id.hideScreenImage).setOnClickListener {
             dialog.dismiss()
         }
         return view

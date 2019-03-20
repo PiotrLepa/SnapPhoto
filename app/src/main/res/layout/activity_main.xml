@@ -30,7 +30,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/backgroundView"
                 android:id="@+id/autoAdjustToolbar"
-                app:setupWithViewPager="@{viewPager}"/>
+                app:setupWithViewPager="@{viewPager}"
+                app:openDialogFragmentOnProfileImageClick="@{true}"/>
 
         <Space
                 android:id="@+id/toolbarHeightSpace"

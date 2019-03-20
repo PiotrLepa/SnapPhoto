@@ -50,6 +50,10 @@ class AutoAdjustToolbar @JvmOverloads constructor(
         viewpager.addOnPageChangeListener(this)
     }
 
+    fun setOnUserImageClickListener(listener: OnClickListener) {
+        userImage.setOnClickListener(listener)
+    }
+
     private fun adjustToolbarToStatusBarSize() {
         setOnApplyWindowInsetsListener { v, insets ->
             val statusBarSize = insets.systemWindowInsetTop

@@ -4,4 +4,6 @@
     <dimen name="marginToolbarIcon">14dp</dimen>
     <dimen name="marginToolbarFlashIcon">28dp</dimen> <!-- 2 * @dimen/marginToolbarIcon-->
     <dimen name="bottomMarginSpace">44dp</dimen> <!--@dimen/actionBarIcon + margin from toolbar-->
+
+    <dimen name="userProfileIcons">35dp</dimen>
 </resources>
