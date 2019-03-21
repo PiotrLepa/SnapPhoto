@@ -4,11 +4,14 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.snapphoto.R
 import com.example.snapphoto.internal.FRAGMENT_CAMERA
 import com.example.snapphoto.internal.FRAGMENT_FRIENDS
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.toolbar_auto_adjust.view.*
 import timber.log.Timber
 
@@ -48,6 +51,24 @@ class AutoAdjustToolbar @JvmOverloads constructor(
 
     fun setupWithViewPager(viewpager: ViewPager) {
         viewpager.addOnPageChangeListener(this)
+    }
+
+    fun setupWithBottomSheetDialogFragment(dialogFragment: BottomSheetDialogFragment) {
+        Timber.d("setupWithBottomSheetDialogFragment: dialogFragment: ${dialogFragment.dialog}")
+        val bottomSheet = dialogFragment.dialog.findViewById<FrameLayout>(R.id.design_bottom_sheet)
+        val behavior = BottomSheetBehavior.from(bottomSheet)
+        behavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(view: View, positionOffSet: Float) {
+//                moveToFriendsFragment(positionOffSet)
+                Timber.d("onSlide: posOffSet: $positionOffSet")
+            }
+
+            override fun onStateChanged(view: View, state: Int) {
+//                if (state == BottomSheetBehavior.STATE_HALF_EXPANDED) {
+//                    dialogFragment.dialog.dismiss()
+//                }
+            }
+        })
     }
 
     fun setOnUserImageClickListener(listener: OnClickListener) {

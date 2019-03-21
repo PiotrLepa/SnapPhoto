@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        app:cardUseCompatPadding="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ImageView
+                android:layout_width="@dimen/userProfileIcons"
+                android:layout_height="@dimen/userProfileIcons"
+                tools:srcCompat="@drawable/default_user"
+                android:id="@+id/iconImage"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp" android:layout_marginBottom="12dp"/>
+        <TextView
+                tools:text="Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelText"
+                style="@style/DefaultTextStyle"
+                app:layout_constraintTop_toTopOf="@+id/iconImage"
+                app:layout_constraintBottom_toBottomOf="@+id/iconImage"
+                app:layout_constraintStart_toEndOf="@+id/iconImage" android:layout_marginStart="24dp"/>
+        <ImageView
+                android:layout_width="@dimen/userProfileIcons"
+                android:layout_height="@dimen/userProfileIcons"
+                tools:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp"
+                android:id="@+id/actionImage"
+                app:layout_constraintTop_toTopOf="@+id/iconImage"
+                app:layout_constraintBottom_toBottomOf="@+id/iconImage"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

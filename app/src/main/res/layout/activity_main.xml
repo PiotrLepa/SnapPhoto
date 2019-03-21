@@ -31,7 +31,8 @@
                 app:layout_constraintTop_toTopOf="@+id/backgroundView"
                 android:id="@+id/autoAdjustToolbar"
                 app:setupWithViewPager="@{viewPager}"
-                app:openDialogFragmentOnProfileImageClick="@{true}"/>
+                app:openDialogFragmentOnProfileImageClick="@{viewmodel.userProfileDialogFragment}"
+                app:setupWithBottomSheetDialogFragment="@{viewmodel.userProfileDialogFragment}"/>
 
         <Space
                 android:id="@+id/toolbarHeightSpace"
@@ -52,21 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbarHeightSpace" app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintVertical_bias="0.0">
-
-            <fragment
-                    android:id="@+id/navHostFragment"
-                    android:name="androidx.navigation.fragment.NavHostFragment"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:navGraph="@navigation/main_navigation"
-                    app:defaultNavHost="true"
-                    app:layout_constraintTop_toTopOf="@id/viewPager"
-                    app:layout_constraintStart_toStartOf="@id/viewPager"
-                    app:layout_constraintBottom_toBottomOf="@id/viewPager"
-                    app:layout_constraintEnd_toEndOf="@id/viewPager"/>
-
-        </androidx.viewpager.widget.ViewPager>
+                app:layout_constraintVertical_bias="0.0"/>
 
         <com.example.snapphoto.ui.view.SnapphotoTabsView
                 android:id="@+id/tabsView"

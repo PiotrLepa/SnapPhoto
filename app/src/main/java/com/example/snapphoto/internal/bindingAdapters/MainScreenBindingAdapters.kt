@@ -19,7 +19,6 @@ import com.example.snapphoto.internal.FRAGMENT_FRIENDS
 import com.example.snapphoto.internal.USER_PROFILE_DIALOG_FRAGMENT
 import com.example.snapphoto.internal.VERTICAL_FRAGMENT_SAVED_PHOTOS
 import com.example.snapphoto.internal.adapters.ScreenSlidePageAdapter
-import com.example.snapphoto.ui.main.camera.CameraFragmentDirections
 import com.example.snapphoto.ui.userProfile.UserProfileDialogFragment
 import com.example.snapphoto.ui.view.AutoAdjustToolbar
 import com.example.snapphoto.ui.view.SnapphotoTabsView
@@ -38,14 +37,24 @@ import timber.log.Timber
 )
 object MainScreenBindingAdapters {
 
+    @BindingAdapter("setupWithBottomSheetDialogFragment")
+    @JvmStatic fun setupWithBottomSheetDialogFragment(toolbar: AutoAdjustToolbar, userProfileDialogFragment: UserProfileDialogFragment) {
+//        if (!shouldOpen) return
+
+        userProfileDialogFragment.setOnDialogCreateListener(object: UserProfileDialogFragment.OnCreateDialogListener {
+            override fun onCreatedDialog() {
+                toolbar.setupWithBottomSheetDialogFragment(userProfileDialogFragment)
+            }
+        })
+    }
+
     @BindingAdapter("openDialogFragmentOnProfileImageClick")
-    @JvmStatic fun openDialogFragmentOnProfileImageClick(toolbar: AutoAdjustToolbar, shouldOpen: Boolean) {
-        if (!shouldOpen) return
+    @JvmStatic fun openDialogFragmentOnProfileImageClick(toolbar: AutoAdjustToolbar, userProfileDialogFragment: UserProfileDialogFragment) {
+//        if (!shouldOpen) return
 
         toolbar.setOnUserImageClickListener(View.OnClickListener {
             val fragmentManager = (toolbar.context as AppCompatActivity).supportFragmentManager
-            val dialogFragment = UserProfileDialogFragment.newInstance()
-            dialogFragment.show(fragmentManager, USER_PROFILE_DIALOG_FRAGMENT)
+            userProfileDialogFragment   .show(fragmentManager, USER_PROFILE_DIALOG_FRAGMENT)
         })
     }
 

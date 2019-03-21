@@ -21,4 +21,11 @@
     <declare-styleable name="SnapphotoTabsView">
         <attr name="onWidgetClick" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="SnapphotoButton">
+        <attr name="iconImage" format="reference"/>
+        <attr name="labelText" format="string"/>
+        <attr name="actionImage" format="reference"/>
+        <attr name="iconColor" format="color"/>
+    </declare-styleable>
 </resources>

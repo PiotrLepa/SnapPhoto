@@ -45,4 +45,9 @@
         <item name="boxStrokeColor">@color/colorBlue</item>
     </style>
 
+    <style name="DefaultTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 </resources>

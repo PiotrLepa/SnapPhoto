@@ -6,6 +6,7 @@ import com.example.snapphoto.internal.FRAGMENT_CAMERA
 import com.example.snapphoto.ui.main.camera.CameraFragment
 import com.example.snapphoto.ui.main.friends.FriendsFragment
 import com.example.snapphoto.ui.main.stories.StoriesFragment
+import com.example.snapphoto.ui.userProfile.UserProfileDialogFragment
 
 class MainViewModel : ViewModel() {
 
@@ -16,4 +17,6 @@ class MainViewModel : ViewModel() {
     )
 
     var currentPage = MutableLiveData<Int>(FRAGMENT_CAMERA)
+
+    val userProfileDialogFragment = UserProfileDialogFragment.newInstance()
 }

@@ -5,7 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.userProfile.UserProfileDialogFragment"
-        android:background="@drawable/view_pager_background">
+        android:background="@color/colorDarkWhite">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
@@ -32,6 +32,27 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+            android:text="Piotrek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            style="@style/DefaultTextStyle"
+            android:id="@+id/displayNameText" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/userProfileImage" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"/>
+
+    <TextView
+            android:text="piotr43a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DefaultTextStyle"
+            android:textSize="16sp"
+            android:id="@+id/usernameText" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/displayNameText" app:layout_constraintEnd_toEndOf="@+id/displayNameText"
+            app:layout_constraintStart_toStartOf="@+id/displayNameText"/>
+
     <ImageView
             android:src="@drawable/default_user"
             android:layout_width="100dp"
@@ -41,5 +62,60 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintTop_toBottomOf="@+id/toolbarConstraintLayout"/>
+
+    <com.example.snapphoto.ui.view.SnapphotoButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:iconImage="@drawable/ic_friend_add_white_40dp"
+            app:iconColor="@color/colorDarkGray"
+            app:labelText="@string/add_friends"
+            app:actionImage="@drawable/ic_keyboard_arrow_right_light_gray_24dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/usernameText" android:id="@+id/addFriendsButton"/>
+    <TextView
+            android:text="@string/stories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DefaultTextStyle"
+            android:textStyle="bold"
+            android:id="@+id/storiesText" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addFriendsButton" android:layout_marginTop="24dp"/>
+
+    <com.example.snapphoto.ui.view.SnapphotoButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:iconImage="@drawable/ic_camera_alt_white_24dp"
+            app:iconColor="@color/colorBlue"
+            app:labelText="@string/add_to_my_story"
+            app:actionImage="@drawable/ic_more_vert_light_gray_24dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:id="@+id/addToStoryButton" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/storiesText"/>
+
+    <TextView
+            android:text="@string/selfie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/DefaultTextStyle"
+            android:textStyle="bold"
+            android:id="@+id/selfieText" android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addToStoryButton" android:layout_marginTop="24dp"/>
+
+    <com.example.snapphoto.ui.view.SnapphotoButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:iconImage="@drawable/ic_mood_white_24dp"
+            app:iconColor="@color/colorDarkGray"
+            app:labelText="@string/select_selfie"
+            app:actionImage="@drawable/ic_keyboard_arrow_right_light_gray_24dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:id="@+id/selectSelfieButton" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/selfieText"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

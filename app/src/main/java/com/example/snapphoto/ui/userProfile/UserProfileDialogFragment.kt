@@ -1,11 +1,11 @@
 package com.example.snapphoto.ui.userProfile
 
+import android.app.Dialog
 import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 import com.example.snapphoto.R
@@ -14,6 +14,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import timber.log.Timber
 
 class UserProfileDialogFragment : BottomSheetDialogFragment() {
+
+    interface OnCreateDialogListener {
+        fun onCreatedDialog()
+    }
+    private var onCreateDialogListener: OnCreateDialogListener?= null
 
     companion object {
         fun newInstance() = UserProfileDialogFragment()
@@ -29,6 +34,7 @@ class UserProfileDialogFragment : BottomSheetDialogFragment() {
         view.findViewById<ImageView>(R.id.hideScreenImage).setOnClickListener {
             dialog.dismiss()
         }
+
         return view
     }
 
@@ -38,7 +44,12 @@ class UserProfileDialogFragment : BottomSheetDialogFragment() {
         // TODO: Use the ViewModel
         Timber.d("onActivityCreated: dialog: $dialog")
         setDialogToFullScreen()
+        onCreateDialogListener?.onCreatedDialog()
         dialog.window.attributes.windowAnimations = R.style.UserProfileAnimator
+    }
+
+    fun setOnDialogCreateListener(dialogListener: OnCreateDialogListener) {
+        onCreateDialogListener = dialogListener
     }
 
     private fun setDialogToFullScreen() {
@@ -54,16 +65,16 @@ class UserProfileDialogFragment : BottomSheetDialogFragment() {
             bottomSheetBehavior.peekHeight = view.measuredHeight
             ((bottomSheet.parent) as View).setBackgroundColor(Color.TRANSPARENT)
 
-            bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                override fun onSlide(view: View, positionOffSet: Float) {
-                }
-
-                override fun onStateChanged(view: View, state: Int) {
-                    if (state == BottomSheetBehavior.STATE_HIDDEN) {
-                        dismiss()
-                    }
-                }
-            })
+//            bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+//                override fun onSlide(view: View, positionOffSet: Float) {
+//                }
+//
+//                override fun onStateChanged(view: View, state: Int) {
+//                    if (state == BottomSheetBehavior.STATE_HIDDEN) {
+//                        dismiss()
+//                    }
+//                }
+//            })
         }
     }
 }

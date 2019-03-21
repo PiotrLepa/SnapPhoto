@@ -12,4 +12,9 @@
     <string name="please_fill_all_fields">Please fill all fields.</string>
     <string name="passwords_are_different">Passwords are different.</string>
     <string name="search">Search</string>
+    <string name="add_friends">Add Friends</string>
+    <string name="stories">Stories</string>
+    <string name="add_to_my_story">Add to My Story</string>
+    <string name="selfie">Selfie</string>
+    <string name="select_selfie">Select Selfie</string>
 </resources>
